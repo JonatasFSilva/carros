@@ -11,7 +11,6 @@ public class IndexController {
 	@GetMapping //METODO PARA TRAZER ALGO
 	public String get() {
 		return "API DOS CARROS!!!";
-	}	
-	
+	}
 	
 }
