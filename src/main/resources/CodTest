@@ -1,0 +1,32 @@
+@GetMapping("/login") // GET COM PASSAGEM DE PARAMETROS PELA URL **** NAO FAZER ISSO ****
+	public String login(
+			@RequestParam("login") String login,
+			@RequestParam("senha") String senha) {
+		return "Login: " + login + " Senha: " + senha;		
+		/*
+		 * exemplo de como colocar os dados na URL
+		 * localhost:8080/login?login=teste&senha=123
+		 * 
+		 * */
+
+	
+	@GetMapping("/login/v2/{login}/senha/{senha}")
+	public String login2(@PathVariable String login,
+			@PathVariable String senha) 
+	{return "Login: " + login + " Senha: " + senha;	
+	}
+	
+	@GetMapping("/carros/{id}")
+	public String getCarroById(@PathVariable Long id) {
+		return  "Carro by id: " + id;
+	}
+	
+	@GetMapping("/carro/tipo/{tipo}")
+	public String getCarrosByTipo(@PathVariable String tipo) {
+		return "Lista de Carros Tipo: " + tipo;
+	}
+	
+	@PostMapping("login/v2/")
+	public String login3(@RequestParam("login") String login, @RequestParam("senha")String senha) {
+		return "Login: " + login + " Senha: " + senha;
+	}
