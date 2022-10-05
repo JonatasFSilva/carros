@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/")//DEFINE PARA ONDE O WEB SERVICE ESTA MAPEADO
 public class IndexController {
 	
-	@GetMapping
+	@GetMapping //METODO PARA TRAZER ALGO
 	public String hello() {
 		return "Hello Spring Boot!!!";
 	}
