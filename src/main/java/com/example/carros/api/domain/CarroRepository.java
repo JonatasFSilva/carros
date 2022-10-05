@@ -1,5 +1,7 @@
 package com.example.carros.api.domain;
 
-public interface CarroRepository {
+import org.springframework.data.repository.CrudRepository;
+
+public interface CarroRepository extends CrudRepository<Carro, Long>{
 
 }
