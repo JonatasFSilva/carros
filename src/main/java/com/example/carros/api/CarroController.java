@@ -1,8 +1,10 @@
 package com.example.carros.api;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,18 +25,27 @@ public class CarroController {
 	private CarroService service;
 
 	@GetMapping // VERBO HHTP PARA TRAZER UMA LISTA DE OBJETOS SEM FILTRO
-	public Iterable<Carro> getAll() {
-		return service.getCarros();
+	public ResponseEntity<Iterable<Carro>> getAll() {
+		return ResponseEntity.ok(service.getCarros());
 	}
 
 	@GetMapping("/{id}") // VERBO HHTP PARA TRAZER UM OBJETO FILTRADO PELO SEU ID
-	public Optional<Carro> getById(@PathVariable Long id) {
-		return service.getCarroById(id);
+	public ResponseEntity getById(@PathVariable Long id) {
+		Optional<Carro> carro = service.getCarroById(id);
+		//STATUS OK (200)
+		// STATUS NO_CONTENT (204)
+
+		return carro.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
 	}
 
 	@GetMapping("/tipo/{tipo}") // VERBO HHTP PARA TRAZER UMA LISTA FILTRADA PELO SEU TIPO
-	public Iterable<Carro> getByTipo(@PathVariable String tipo) {
-		return service.getCarroByTipo(tipo);
+	public ResponseEntity getByTipo(@PathVariable String tipo) {
+		List<Carro> carros = service.getCarroByTipo(tipo);
+
+		// SE A LISTA CARROS ESTIVER VAZIA ENTAO (?) RETORNA NO_CONTENT(204) CASO CONTRARIO
+		// (:) RETORNA OK(200)
+		return carros.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(carros);
+
 	}
 
 	@PostMapping

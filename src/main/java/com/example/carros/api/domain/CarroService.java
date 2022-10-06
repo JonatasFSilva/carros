@@ -1,5 +1,6 @@
 package com.example.carros.api.domain;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class CarroService {
 	}
 
 	// TRAZ UM LISTA DE OBJETOS FILTRADO
-	public Iterable<Carro> getCarroByTipo(String tipo) {
+	public List<Carro> getCarroByTipo(String tipo) {
 		return repository.findByTipo(tipo);
 	}
 
