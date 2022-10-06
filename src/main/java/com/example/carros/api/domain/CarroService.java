@@ -28,8 +28,7 @@ public class CarroService {
 	}
 
 	public Carro save(Carro carro) {
-		return repository.save(carro);
-		
+		return repository.save(carro);		
 	}
 
 	public Carro update(Carro carro, Long id){
@@ -49,21 +48,14 @@ public class CarroService {
 			return db;
 			
 		}).orElseThrow(() -> new RuntimeException("Não foi possivel atualizar o registro"));		
-		
-		
 	}
-	
-	/*
-	public List<Carro> getCarrosFake(){
-		List<Carro> carros = new ArrayList<>();
-		
-		carros.add(new Carro(1L,"Fusca", ""));
-		carros.add(new Carro(2L,"Brasilia" ,""));
-		carros.add(new Carro(3L,"Chevette" ,""));
-		
-		return carros;
-	}*/
 
 	
-
+	public void delete(Long id) {
+		
+		Optional<Carro> carro = getCarroById(id);
+		if(carro.isPresent()) {
+			repository.deleteById(id);
+		}
+	}
 }
