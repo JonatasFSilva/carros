@@ -5,6 +5,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,14 +20,26 @@ public class CarroController {
 	@Autowired
 	private CarroService service;
 
-	@GetMapping // METODO PARA TRAZER ALGO
+	@GetMapping // VERBO HHTP PARA TRAZER UMA LISTA DE OBJETOS SEM FILTRO
 	public Iterable<Carro> getAll() {
 		return service.getCarros();
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/{id}") // VERBO HHTP PARA TRAZER UM OBJETO FILTRADO PELO SEU ID
 	public Optional<Carro> getById(@PathVariable Long id) {
 		return service.getCarroById(id);
+	}
+	
+	@GetMapping("/tipo/{tipo}") // VERBO HHTP PARA TRAZER UMA LISTA FILTRADA PELO SEU TIPO
+	public Iterable<Carro> getByTipo(@PathVariable String tipo){
+		return service.getCarroByTipo(tipo);
+	}
+	
+	@PostMapping
+	public String insert(@RequestBody Carro carro) {
+		 Carro result = service.save(carro);
+		 
+		 return "Carro salvo com sucesso id: " + result.getId();
 	}
 
 }

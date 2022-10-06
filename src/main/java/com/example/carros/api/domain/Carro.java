@@ -22,14 +22,15 @@ public class Carro {
 	private String nome;
 	private String tipo;	
 
-	public Carro() {}
+	public Carro() {}	
 	
-	public Carro(Long id, String nome) {
+	public Carro(Long id, String nome, String tipo) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.tipo = tipo;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
