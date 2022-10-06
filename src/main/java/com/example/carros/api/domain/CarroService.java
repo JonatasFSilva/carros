@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 @Service
 public class CarroService {
@@ -28,6 +29,27 @@ public class CarroService {
 
 	public Carro save(Carro carro) {
 		return repository.save(carro);
+		
+	}
+
+	public Carro update(Carro carro, Long id){
+		
+		Assert.notNull(id, "Não foi possivel atualizar o registro");
+		
+		return getCarroById(id).
+		map(db -> {
+			//COPIA AS PROPIEDADES DO BANCO DE DADOS
+			db.setNome(carro.getNome());
+			db.setTipo(carro.getTipo());
+			System.out.println("Carro id: " + db.getId());
+			
+			//ATUALIZA O OBJETO NO BANCO DE DADOS
+			repository.save(db);
+			
+			return db;
+			
+		}).orElseThrow(() -> new RuntimeException("Não foi possivel atualizar o registro"));		
+		
 		
 	}
 	
