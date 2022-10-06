@@ -2,8 +2,8 @@ package com.example.carros.api.domain;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface CarroRepository extends CrudRepository<Carro, Long>{
+public interface CarroRepository extends CrudRepository<Carro, Long> {
 
-	Iterable <Carro> findByTipo(String tipo);
+	Iterable<Carro> findByTipo(String tipo);
 
 }

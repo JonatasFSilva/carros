@@ -31,31 +31,31 @@ public class CarroController {
 	public Optional<Carro> getById(@PathVariable Long id) {
 		return service.getCarroById(id);
 	}
-	
+
 	@GetMapping("/tipo/{tipo}") // VERBO HHTP PARA TRAZER UMA LISTA FILTRADA PELO SEU TIPO
-	public Iterable<Carro> getByTipo(@PathVariable String tipo){
+	public Iterable<Carro> getByTipo(@PathVariable String tipo) {
 		return service.getCarroByTipo(tipo);
 	}
-	
+
 	@PostMapping
 	public String insert(@RequestBody Carro carro) {
-		 Carro result = service.save(carro);
-		 
-		 return "Carro salvo com sucesso id: " + result.getId();
+		Carro result = service.save(carro);
+
+		return "Carro salvo com sucesso id: " + result.getId();
 	}
-	
+
 	@PutMapping("/{id}")
-	public String update(@PathVariable Long id, @RequestBody Carro carro ) {
+	public String update(@PathVariable Long id, @RequestBody Carro carro) {
 		Carro result = service.update(carro, id);
-		
+
 		return "Carro atualizado com sucesso id: " + result.getId();
 	}
-	
+
 	@DeleteMapping("/{id}")
 	public String delete(@PathVariable Long id) {
-		
+
 		service.delete(id);
-		
+
 		return "Carro deletado com sucesso id: " + id;
 	}
 
