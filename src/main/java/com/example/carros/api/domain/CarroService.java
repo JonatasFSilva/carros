@@ -20,17 +20,17 @@ public class CarroService {
 	// TRAZ UM LISTA DE OBJETOS
 	public List<CarroDTO> getCarros() {
 
-		return repository.findAll().stream().map(c -> new CarroDTO(c)).collect(Collectors.toList());
+		return repository.findAll().stream().map(c -> CarroDTO.create(c)).collect(Collectors.toList());
 	}
 
 	// TRAZ UM OBJETO FILTRADO
 	public Optional<CarroDTO> getCarroById(Long id) {
-		return repository.findById(id).map(CarroDTO::new);
+		return repository.findById(id).map(CarroDTO::create);
 	}
 
 	// TRAZ UM LISTA DE OBJETOS FILTRADO
 	public List<CarroDTO> getCarroByTipo(String tipo) {
-		return repository.findByTipo(tipo).stream().map(c -> new CarroDTO(c)).collect(Collectors.toList());
+		return repository.findByTipo(tipo).stream().map(c -> CarroDTO.create(c)).collect(Collectors.toList());
 	}
 
 	public Carro save(Carro carro) {

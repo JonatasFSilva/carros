@@ -55,7 +55,7 @@ public class CarroController {
 	}
 
 	@PutMapping("/{id}")
-	public CarroDTO updateById(@PathVariable Long id, @RequestBody Carro carro) {
+	public Carro updateById(@PathVariable Long id, @RequestBody Carro carro) {
 		return service.updateById(carro, id);
 	}
 

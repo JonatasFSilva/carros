@@ -1,5 +1,7 @@
 package com.example.carros.api.domain.dto;
 
+import org.modelmapper.ModelMapper;
+
 import com.example.carros.api.domain.Carro;
 
 import lombok.Data;
@@ -13,10 +15,9 @@ public class CarroDTO {
 	
 	public CarroDTO() {}
 
-	public CarroDTO(Carro c) {
-		this.id = c.getId();
-		this.nome = c.getNome();
-		this.tipo = c.getTipo();
+	public static CarroDTO create(Carro carro){
+		ModelMapper modelMapper = new ModelMapper();
+		return modelMapper.map(carro, CarroDTO.class);
 	}
 
 }
