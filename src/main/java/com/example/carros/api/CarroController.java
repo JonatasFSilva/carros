@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.carros.api.domain.Carro;
 import com.example.carros.api.domain.CarroService;
+import com.example.carros.api.domain.dto.CarroDTO;
 
 @RestController // TRANSFORMA ESSA CLASSE EM UM WEB SERVICE REST
 @RequestMapping("/api/v1/carros") // DEFINE PARA ONDE O WEB SERVICE ESTA MAPEADO
@@ -25,27 +26,25 @@ public class CarroController {
 	private CarroService service;
 
 	@GetMapping // VERBO HHTP PARA TRAZER UMA LISTA DE OBJETOS SEM FILTRO
-	public ResponseEntity<Iterable<Carro>> getAll() {
+	public ResponseEntity getAll() {
 		return ResponseEntity.ok(service.getCarros());
 	}
 
 	@GetMapping("/{id}") // VERBO HHTP PARA TRAZER UM OBJETO FILTRADO PELO SEU ID
 	public ResponseEntity getById(@PathVariable Long id) {
-		Optional<Carro> carro = service.getCarroById(id);
-		//STATUS OK (200)
+		Optional<CarroDTO> carro = service.getCarroById(id);
+		// STATUS OK (200)
 		// STATUS NO_CONTENT (204)
-
 		return carro.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
 	}
 
 	@GetMapping("/tipo/{tipo}") // VERBO HHTP PARA TRAZER UMA LISTA FILTRADA PELO SEU TIPO
 	public ResponseEntity getByTipo(@PathVariable String tipo) {
-		List<Carro> carros = service.getCarroByTipo(tipo);
-
-		// SE A LISTA CARROS ESTIVER VAZIA ENTAO (?) RETORNA NO_CONTENT(204) CASO CONTRARIO
+		List<CarroDTO> carros = service.getCarroByTipo(tipo);
+		// SE A LISTA CARROS ESTIVER VAZIA ENTAO (?) RETORNA NO_CONTENT(204) CASO
+		// CONTRARIO
 		// (:) RETORNA OK(200)
 		return carros.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(carros);
-
 	}
 
 	@PostMapping
@@ -56,10 +55,8 @@ public class CarroController {
 	}
 
 	@PutMapping("/{id}")
-	public String update(@PathVariable Long id, @RequestBody Carro carro) {
-		Carro result = service.update(carro, id);
-
-		return "Carro atualizado com sucesso id: " + result.getId();
+	public CarroDTO updateById(@PathVariable Long id, @RequestBody Carro carro) {
+		return service.updateById(carro, id);
 	}
 
 	@DeleteMapping("/{id}")
