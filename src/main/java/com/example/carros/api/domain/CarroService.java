@@ -33,19 +33,22 @@ public class CarroService {
 		return repository.findByTipo(tipo).stream().map(c -> CarroDTO.create(c)).collect(Collectors.toList());
 	}
 
-	public Carro save(Carro carro) {
-		return repository.save(carro);
+	public CarroDTO save(Carro carro) {
+		Assert.isNull(carro.getId(), "Não foi possivel atualizar o registro");
+		return CarroDTO.create(repository.save(carro));
 	}
 	
 
-	public void delete(Long id) {
+	public boolean delete(Long id) {
 		
 		if (getCarroById(id).isPresent()) {
 			repository.deleteById(id);
+			return true;
 		}
+		return false;
 	}
 
-	public Carro updateById(Carro carro, Long id) {
+	public CarroDTO updateById(Carro carro, Long id) {
 		Assert.notNull(id, "Não foi possivel atualizar o registro");
 		Optional<Carro> optional = repository.findById(id);
 		if(optional.isPresent()) {
@@ -59,7 +62,7 @@ public class CarroService {
 			//ATUALIZA O OBJETO
 			repository.save(db);
 			
-			return db;
+			return CarroDTO.create(db);
 		}else {
 			throw new RuntimeException("Não foi possivel atualizar o registro");
 		}
