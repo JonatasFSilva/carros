@@ -39,7 +39,6 @@ public class CarrosAPITest {
         assertNotNull(carros);
         assertEquals(30,carros.size());
     }
-
     @Test
     public void listCarrosByTipoTest(){
         assertEquals(10,getCarros("/api/v1/carros/tipo/classicos").getBody().size());
@@ -48,15 +47,44 @@ public class CarrosAPITest {
 
         assertEquals(HttpStatus.NO_CONTENT,getCarros("/api/v1/carros/tipo/xxx").getStatusCode());
     }
+    @Test
+    public void getOkTest(){
+        ResponseEntity<CarroDTO> response = getCarro("/api/v1/carros/11");
+        assertEquals(response.getStatusCode(),HttpStatus.OK);
+
+        CarroDTO result = response.getBody();
+        assertEquals("Ferrari FF",result.getNome());
+    }
+    @Test
+    public void getNotFoundTest(){
+        ResponseEntity response = getCarro("/api/v1/carros/1100");
+        assertEquals(response.getStatusCode(), HttpStatus.NOT_FOUND);
+    }
 
     @Test
-    public void saveTest(){
+    public void saveCarroTest(){
         Carro carro = new Carro();
-        carro.setNome("");
-        carro.setTipo("");
+        carro.setNome("Porshe");
+        carro.setTipo("esportivos");
 
         //INSERT
         ResponseEntity response = rest.postForEntity("/api/v1/carros", carro, null);
-        System.out.println(response);
+
+        //VERIFICA SE CRIOU
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+
+        //BUSCA O OBJETO
+        String location = response.getHeaders().get("location").get(0);
+        CarroDTO carroDTO = getCarro(location).getBody();
+
+        assertNotNull(carroDTO);
+        assertEquals("Porshe", carroDTO.getNome());
+        assertEquals("esportivos", carroDTO.getTipo());
+
+        //DELETAR O OBJETO
+        rest.delete(location);
+
+        //VERIFICAR SE DELETOU
+        assertEquals(HttpStatus.NOT_FOUND, getCarro(location).getStatusCode());
     }
 }
