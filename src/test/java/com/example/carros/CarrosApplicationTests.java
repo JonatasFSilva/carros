@@ -15,10 +15,8 @@ import static junit.framework.TestCase.*;
 
 @SpringBootTest
 class CarrosApplicationTests {
-
 	@Autowired
 	private CarroService service;
-
 	@Test
 	@DisplayName("Deve inserir um objeto carro na tabela")
 	public void insertCarroTest(){
@@ -47,13 +45,27 @@ class CarrosApplicationTests {
 		//VERIFICAR SE O OBJETO FOI DELETADO
 		assertFalse(service.getCarroById(id).isPresent());
 	}
-
 	@Test
 	@DisplayName("Deve listar os carros")
-	public void listCarrosTest(){
+	public void listAllCarrosTest(){
 		List<CarroDTO> carros = service.getCarros();
 
 		assertEquals(30, carros.size());
 	}
+	@Test
+	@DisplayName("Deve listar carro por ID")
+	public void listCarroByIDTest(){
+		Optional<CarroDTO> carros = service.getCarroById(11L);
 
+		CarroDTO result = carros.get();
+
+		assertEquals("Ferrari FF", result.getNome());
+	}
+	@Test
+	@DisplayName("Deve listar carros por Tipo")
+	public void listCarrosByTipo(){
+		assertEquals("10",service.getCarroByTipo("esportivos").size());
+		assertEquals("10",service.getCarroByTipo("classicos").size());
+		assertEquals("10",service.getCarroByTipo("luxo").size());
+	}
 }
