@@ -14,7 +14,7 @@ class CarrosApplicationTests {
 	private CarroService service;
 
 	@Test
-	@DisplayName("Deve in inserir um objeto carro na tabela")
+	@DisplayName("Deve inserir um objeto carro na tabela")
 	public void insertCarroTest(){
 
 		Carro carro = new Carro();
