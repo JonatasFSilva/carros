@@ -64,8 +64,9 @@ class CarrosApplicationTests {
 	@Test
 	@DisplayName("Deve listar carros por Tipo")
 	public void listCarrosByTipo(){
-		assertEquals("10",service.getCarroByTipo("esportivos").size());
-		assertEquals("10",service.getCarroByTipo("classicos").size());
-		assertEquals("10",service.getCarroByTipo("luxo").size());
+		assertEquals(10,service.getCarroByTipo("esportivos").size());
+		assertEquals(10,service.getCarroByTipo("classicos").size());
+		assertEquals(10,service.getCarroByTipo("luxo").size());
+		assertEquals(0,service.getCarroByTipo("x").size());
 	}
 }
