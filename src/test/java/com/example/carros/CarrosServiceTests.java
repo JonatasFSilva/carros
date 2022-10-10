@@ -14,7 +14,7 @@ import java.util.Optional;
 import static junit.framework.TestCase.*;
 
 @SpringBootTest
-class CarrosApplicationTests {
+class CarrosServiceTests {
 	@Autowired
 	private CarroService service;
 	@Test
