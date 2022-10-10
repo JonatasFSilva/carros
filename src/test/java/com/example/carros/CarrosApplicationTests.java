@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
 import java.util.Optional;
 
 import static junit.framework.TestCase.*;
@@ -45,6 +46,14 @@ class CarrosApplicationTests {
 
 		//VERIFICAR SE O OBJETO FOI DELETADO
 		assertFalse(service.getCarroById(id).isPresent());
+	}
+
+	@Test
+	@DisplayName("Deve listar os carros")
+	public void listCarrosTest(){
+		List<CarroDTO> carros = service.getCarros();
+
+		assertEquals(30, carros.size());
 	}
 
 }
