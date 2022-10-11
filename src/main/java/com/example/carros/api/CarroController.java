@@ -11,7 +11,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @Api(value = "CarroController")
 @RestController // TRANSFORMA ESSA CLASSE EM UM WEB SERVICE REST
@@ -28,10 +27,10 @@ public class CarroController {
 
 	@GetMapping("/{id}") // VERBO HHTP PARA TRAZER UM OBJETO FILTRADO PELO SEU ID
 	public ResponseEntity getById(@PathVariable Long id) {
-		Optional<CarroDTO> carro = service.getCarroById(id);
+		CarroDTO carro = service.getCarroById(id);
 		// STATUS OK (200)
 		// STATUS NO_CONTENT (204)
-		return carro.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+		return ResponseEntity.ok(carro);
 	}
 
 	@GetMapping("/tipo/{tipo}") // VERBO HHTP PARA TRAZER UMA LISTA FILTRADA PELO SEU TIPO

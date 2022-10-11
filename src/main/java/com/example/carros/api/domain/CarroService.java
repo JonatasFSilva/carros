@@ -1,6 +1,7 @@
 package com.example.carros.api.domain;
 
 import com.example.carros.api.domain.dto.CarroDTO;
+import com.example.carros.api.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -22,8 +23,8 @@ public class CarroService {
 	}
 
 	// TRAZ UM OBJETO FILTRADO
-	public Optional<CarroDTO> getCarroById(Long id) {
-		return repository.findById(id).map(CarroDTO::create);
+	public CarroDTO getCarroById(Long id) {
+		return repository.findById(id).map(CarroDTO::create).orElseThrow(() -> new ObjectNotFoundException("Carro não encontrado"));
 	}
 
 	// TRAZ UM LISTA DE OBJETOS FILTRADO

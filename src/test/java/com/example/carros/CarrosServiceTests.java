@@ -3,13 +3,13 @@ package com.example.carros;
 import com.example.carros.api.domain.Carro;
 import com.example.carros.api.domain.CarroService;
 import com.example.carros.api.domain.dto.CarroDTO;
+import com.example.carros.api.exception.ObjectNotFoundException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
-import java.util.Optional;
 
 import static junit.framework.TestCase.*;
 
@@ -32,10 +32,10 @@ class CarrosServiceTests {
 		assertNotNull(id);
 
 		// BUSCAR O OBJETO
-		Optional<CarroDTO> op = service.getCarroById(id);
-		assertTrue(op.isPresent());
+		result = service.getCarroById(id);
+		assertNotNull(result);
 
-		result = op.get();
+
 		assertEquals("Ferrari", result.getNome());
 		assertEquals("esportivo", result.getTipo());
 
@@ -43,7 +43,14 @@ class CarrosServiceTests {
 		service.delete(id);
 
 		//VERIFICAR SE O OBJETO FOI DELETADO
-		assertFalse(service.getCarroById(id).isPresent());
+
+		try {
+			assertNull(service.getCarroById(id));
+			fail("O Carro não foi excluido");
+		}catch (ObjectNotFoundException error){
+			// OK
+		}
+
 	}
 	@Test
 	@DisplayName("Deve listar os carros")
@@ -55,11 +62,12 @@ class CarrosServiceTests {
 	@Test
 	@DisplayName("Deve listar carro por ID")
 	public void listCarroByIDTest(){
-		Optional<CarroDTO> carros = service.getCarroById(11L);
+		CarroDTO carros = service.getCarroById(11L);
 
-		CarroDTO result = carros.get();
+		assertNotNull(carros);
 
-		assertEquals("Ferrari FF", result.getNome());
+
+		assertEquals("Ferrari FF", carros.getNome());
 	}
 	@Test
 	@DisplayName("Deve listar carros por Tipo")
