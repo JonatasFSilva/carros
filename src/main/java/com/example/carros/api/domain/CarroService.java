@@ -1,15 +1,13 @@
 package com.example.carros.api.domain;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-
+import com.example.carros.api.domain.dto.CarroDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import com.example.carros.api.domain.dto.CarroDTO;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CarroService {
@@ -39,13 +37,14 @@ public class CarroService {
 	}
 	
 
-	public boolean delete(Long id) {
+	public void delete(Long id) {
+		repository.deleteById(id);
 		
-		if (getCarroById(id).isPresent()) {
+		/*if (getCarroById(id).isPresent()) {
 			repository.deleteById(id);
 			return true;
 		}
-		return false;
+		return false;*/
 	}
 
 	public CarroDTO updateById(Carro carro, Long id) {

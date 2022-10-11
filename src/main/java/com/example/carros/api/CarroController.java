@@ -46,14 +46,9 @@ public class CarroController {
 	@PostMapping
 	public ResponseEntity insert(@RequestBody Carro carro) {
 
-		try {
 			CarroDTO result = service.save(carro);
 			URI location = getUri(result.getId());
 			return ResponseEntity.created(location).build();
-		} catch (Exception e) {
-
-			return ResponseEntity.badRequest().build();
-		}
 	}
 
 	private URI getUri(Long id) {
@@ -72,7 +67,9 @@ public class CarroController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity delete(@PathVariable Long id) {
 
-		return service.delete(id) ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+		service.delete(id);
+		return ResponseEntity.ok().build();
+		//return service.delete(id) ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
 	}
 
 }
