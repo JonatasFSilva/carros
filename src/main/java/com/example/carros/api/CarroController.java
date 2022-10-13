@@ -12,7 +12,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
-//@Api(value = "CarroController")
 @RestController // TRANSFORMA ESSA CLASSE EM UM WEB SERVICE REST
 @RequestMapping("/api/v1/carros") // DEFINE PARA ONDE O WEB SERVICE ESTA MAPEADO
 public class CarroController {
