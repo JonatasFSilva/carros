@@ -3,7 +3,6 @@ package com.example.carros.api;
 import com.example.carros.api.domain.Carro;
 import com.example.carros.api.domain.CarroService;
 import com.example.carros.api.domain.dto.CarroDTO;
-import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -13,7 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
-@Api(value = "CarroController")
+//@Api(value = "CarroController")
 @RestController // TRANSFORMA ESSA CLASSE EM UM WEB SERVICE REST
 @RequestMapping("/api/v1/carros") // DEFINE PARA ONDE O WEB SERVICE ESTA MAPEADO
 public class CarroController {
