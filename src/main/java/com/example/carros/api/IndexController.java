@@ -16,8 +16,8 @@ public class IndexController {
 	}
 
 	@GetMapping("userInfo/")
-	public UserDetails userInfo(@AuthenticationPrincipal UserDetails user){
-		return user;
+	public UserDetails userInfo(@AuthenticationPrincipal UserDetails username){
+		return username;
 	}
 	
 }
