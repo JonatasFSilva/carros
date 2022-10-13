@@ -1,7 +1,9 @@
 package com.example.carros.api;
 
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
 
+@Api(value = "HomeController")
 @RestController
 @RequestMapping("/home") // DEFINE PARA ONDE O WEB SERVICE ESTA MAPEADO
 public class HomeController {
