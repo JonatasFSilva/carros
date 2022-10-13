@@ -16,6 +16,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests((requests) -> {
             ((ExpressionUrlAuthorizationConfigurer.AuthorizedUrl)requests.anyRequest()).authenticated();
         });
-        http.httpBasic();
+        http.httpBasic().and().csrf().disable();
     }
 }
