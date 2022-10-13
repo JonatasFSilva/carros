@@ -6,6 +6,7 @@ import com.example.carros.api.domain.dto.CarroDTO;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -43,6 +44,7 @@ public class CarroController {
 	}
 
 	@PostMapping
+	@Secured({"ROLE_ADMIN"})
 	public ResponseEntity insert(@RequestBody Carro carro) {
 
 			CarroDTO result = service.save(carro);
