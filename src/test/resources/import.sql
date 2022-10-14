@@ -1,3 +1,9 @@
+insert into role (id,nome) values (1'ROLE_ADMIN');
+insert into role (id,nome) values (2'ROLE_ADMIN');
+insert into user (id, nome, email, login, senha) values (1,'Jonatas Fabricio','jonatas@test.com','jonatas','$2a$10$suow45tNqh6.im.P/hHFv.Ov2iKuc96rhNFxSCxDCCdrFBxHqX3ru');
+insert into user (id, nome, email, login, senha) values (2,'Admin','admin@test.com','admin','$2a$10$suow45tNqh6.im.P/hHFv.Ov2iKuc96rhNFxSCxDCCdrFBxHqX3ru');
+insert into user_roles (user_id, role_id) values(1,1);
+insert into user_roles (user_id, role_id) values(2,2);
 insert into carro (nome,descricao,url_foto,url_video,latitude,longitude,tipo) VALUES('Tucker 1948','Descrição Tucker 1948','http://www.livroandroid.com.br/livro/carros/classicos/Tucker.png','http://www.livroandroid.com.br/livro/carros/classicos/tucker.mp4','-23.564224','-46.653156','classicos');
 insert into carro (nome,descricao,url_foto,url_video,latitude,longitude,tipo) VALUES('Chevrolet Corvette','Descrição Chevrolet Corvette','http://www.livroandroid.com.br/livro/carros/classicos/Chevrolet_Corvette.png','http://www.livroandroid.com.br/livro/carros/classicos/corvette.mp4','-23.564224','-46.653156','classicos');
 insert into carro (nome,descricao,url_foto,url_video,latitude,longitude,tipo) VALUES('Chevrolet Impala Coupe','Descrição Chevrolet Impala Coupe','http://www.livroandroid.com.br/livro/carros/classicos/Chevrolet_Impala_Coupe.png','http://www.livroandroid.com.br/livro/carros/classicos/chevrolet_impala.mp4','-23.564224','-46.653156','classicos');
@@ -28,3 +34,4 @@ insert into carro (nome,descricao,url_foto,url_video,latitude,longitude,tipo) VA
 insert into carro (nome,descricao,url_foto,url_video,latitude,longitude,tipo) VALUES('Mercedes SLR McLaren','Descrição Mercedes SLR McLaren','http://www.livroandroid.com.br/livro/carros/luxo/Mercedes_McLaren.png','http://www.livroandroid.com.br/livro/carros/luxo/mclaren_slr.mp4','-23.564224','-46.653156','luxo');
 insert into carro (nome,descricao,url_foto,url_video,latitude,longitude,tipo) VALUES('Rolls Royce Phantom','Descrição Rolls Royce Phantom','http://www.livroandroid.com.br/livro/carros/luxo/Rolls_Royce_Phantom.png','http://www.livroandroid.com.br/livro/carros/luxo/rolls_royce.mp4','-23.564224','-46.653156','luxo');
 insert into carro (nome,descricao,url_foto,url_video,latitude,longitude,tipo) VALUES('Lexus LFA','Descrição Lexus LFA','http://www.livroandroid.com.br/livro/carros/luxo/Lexus_LFA.png','http://www.livroandroid.com.br/livro/carros/luxo/lexus.mp4','-23.564224','-46.653156','luxo');
+

@@ -22,11 +22,11 @@ public class CarrosAPITest {
     protected TestRestTemplate rest;
 
     private ResponseEntity<CarroDTO> getCarro(String url){
-        return rest.getForEntity(url, CarroDTO.class);
+        return rest.withBasicAuth("admin","$2a$10$suow45tNqh6.im.P/hHFv.Ov2iKuc96rhNFxSCxDCCdrFBxHqX3ru").getForEntity(url, CarroDTO.class);
     }
 
     private ResponseEntity<List<CarroDTO>> getCarros(String url){
-        return rest.exchange(
+        return rest.withBasicAuth("admin","123").exchange(
                 url,
                 HttpMethod.GET,
                 null,
@@ -68,7 +68,7 @@ public class CarrosAPITest {
         carro.setTipo("esportivos");
 
         //INSERT
-        ResponseEntity response = rest.postForEntity("/api/v1/carros", carro, null);
+        ResponseEntity response = rest.withBasicAuth("admin","$2a$10$suow45tNqh6.im.P/hHFv.Ov2iKuc96rhNFxSCxDCCdrFBxHqX3ru").postForEntity("/api/v1/carros", carro, null);
 
         //VERIFICA SE CRIOU
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
@@ -82,7 +82,7 @@ public class CarrosAPITest {
         assertEquals("esportivos", carroDTO.getTipo());
 
         //DELETAR O OBJETO
-        rest.delete(location);
+        rest.withBasicAuth("admin","123").delete(location);
 
         //VERIFICAR SE DELETOU
         assertEquals(HttpStatus.NOT_FOUND, getCarro(location).getStatusCode());
